@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Orion\Http\Controllers\Controller;
+use App\Models\Persona;
+use App\Http\Requests\PersonaRequest;
+use Orion\Http\Requests\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class Personacontroller extends Controller
+{
+    protected $model = Persona::class;
+   protected $request = PersonaRequest::class;
+
+
+    public function sortableBy(): array
+    {
+        return ['created_at'];
+    }
+
+    /*
+        @param Request $request
+
+        @param Model $entity
+
+     */
+    protected function afterStore($request, Model $entity):void
+    {
+        $uuid = Str::uuid();
+        $entity->uuid =$uuid;
+    }
+
+
+}
