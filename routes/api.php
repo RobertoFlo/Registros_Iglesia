@@ -12,14 +12,12 @@ use App\Http\Controllers\Api\Bautizocontroller;
 use App\Http\Controllers\Api\Confirmacontroller;
 use App\Http\Controllers\Api\Finanzascontroller;
 use App\Http\Controllers\Api\Bodacontroller;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::post('/login-app',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
-
-
-
 
 // Route::view('/email/verified', 'verifyEmail')->name('email.verified');
 Route::post('/login', function () {
@@ -44,9 +42,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
-
     // Route::get('/email/verify', function () {
     //     //return view('/email/verified');
     //     return redirect('/email/verified');
@@ -65,5 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Orion::resource('confirma', Confirmacontroller::class);
     Orion::resource('finanza', Finanzascontroller::class);
     Orion::resource('matrimonio', Bodacontroller::class);
-
 });
+
+
+Route::get('/permissions', [RoleController::class, 'listPermissions'])->middleware('auth:sanctum');
+Route::post('/roles', [RoleController::class, 'store'])->middleware('auth:sanctum');
