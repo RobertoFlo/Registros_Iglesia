@@ -16,14 +16,14 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::post('/login-app',[AuthController::class,'login']);
+Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 
 // Route::view('/email/verified', 'verifyEmail')->name('email.verified');
-Route::post('/login', function () {
-   //return redirect()->route('email.verified');
-      return response()->json(['message' => 'Correo verificado con éxito']);
-})->name('login');
+// Route::post('/login', function () {
+//    //return redirect()->route('email.verified');
+//       return response()->json(['message' => 'Correo verificado con éxito']);
+// })->name('login');
 
 
 // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {

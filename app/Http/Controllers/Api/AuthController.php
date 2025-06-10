@@ -11,37 +11,36 @@ use App\Http\Requests\StorePostRequestRegister;
 use App\Models\Persona;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function login():JsonResponse
+    public function login(): JsonResponse
     {
         request()->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
         $user = User::where('email', request()->email)->first();
-        if($user &&  Hash::check(request()->password, $user->password)){
+        if ($user &&  Hash::check(request()->password, $user->password)) {
             return response()->json([
                 'user' => $user,
                 'Bearer' => $user->createToken($user->name)->plainTextToken,
             ]);
-        }else{
+        } else {
             return response()->json(['message' => "Datos incorrectos"]);
         }
-
     }
-    public function register(StorePostRequestRegister $request):JsonResponse
+    public function register(StorePostRequestRegister $request): JsonResponse
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        DB::beginTransaction();
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-
-        if($user->save()){
-            //cuando haga login hare que verifique su correo primero
-            //$user->sendEmailVerificationNotification();
             $persona = Persona::create([
                 'primer_nombre' => $request->primer_nombre,
                 'segundo_nombre' => $request->segundo_nombre,
@@ -56,16 +55,14 @@ class AuthController extends Controller
                 'uuid' => Str::uuid(),
                 'nombre_madre' => $request->nombre_madre,
                 'nombre_padre' => $request->nombre_padre,
-
             ]);
-            //event(new Registered($user));
-        return response()->json(['user' => $user]);
 
-       }else{
-        return response()->json(['message' => 'Error al registrar usuario'], 500);
-
-       }
-
+            DB::commit();
+            return response()->json(['user' => $user]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Error al registrar usuario', 'error' => $e->getMessage()], 500);
+        }
     }
     public function logout(Request $request): JsonResponse
     {
@@ -74,9 +71,4 @@ class AuthController extends Controller
             'message' => 'Logged out'
         ]);
     }
-
-
-
-
-
 }
