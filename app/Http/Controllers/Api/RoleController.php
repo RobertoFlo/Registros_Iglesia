@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\PermissionGroup;
 class RoleController extends Controller
 {
     /**
@@ -44,7 +44,6 @@ class RoleController extends Controller
                 'message' => 'Rol creado y permisos asignados exitosamente.',
                 'role' => $role->load('permissions') // Devuelve el rol con sus permisos
             ], 201);
-
         } catch (\Exception $e) {
             DB::rollBack();
             // En caso de un error inesperado, revertimos la transacción
@@ -63,7 +62,23 @@ class RoleController extends Controller
      */
     public function listPermissions()
     {
-        return response()->json(Permission::all());
+        $groups = PermissionGroup::with('permissions')->get();
+
+        $result = $groups->map(function ($group) {
+            return [
+                'id' => $group->id,
+                'name' => $group->name,
+                'permissions' => $group->permissions->map(function ($perm) {
+                    return [
+                        'id' => $perm->id,
+                        'name' => $perm->name,
+                        'guard_name' => $perm->guard_name,
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json($result);
     }
 }
 

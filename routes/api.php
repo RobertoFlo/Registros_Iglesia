@@ -16,7 +16,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login-app',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 
 // Route::view('/email/verified', 'verifyEmail')->name('email.verified');

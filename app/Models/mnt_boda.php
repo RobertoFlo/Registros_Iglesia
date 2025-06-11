@@ -20,7 +20,7 @@ class mnt_boda extends Model
         'fecha_declaracion',
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-    
+
     public function Detalle()
     {
         return $this->hasMany(mnt_detalle_boda::class, 'boda_id')->withTrashed();
