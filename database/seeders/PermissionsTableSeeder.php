@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\PermissionGroup;
 use App\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -70,12 +71,26 @@ class PermissionsTableSeeder extends Seeder
             ]);
         }
 
-        foreach ($permiso_3 as $permiso) {
+        foreach ($permiso_4 as $permiso) {
             Permission::firstOrCreate([
                 'name' => $permiso,
                 'guard_name' => 'api',
                 'group_id' => $grupo_4->id,
             ]);
         }
+        // Crear roles
+        $adminRole = Role::firstOrCreate([
+            'name' => 'administrador',
+            'guard_name' => 'api',
+        ]);
+        $userRole = Role::firstOrCreate([
+            'name' => 'usuario',
+            'guard_name' => 'api',
+        ]);
+
+        // Asignar todos los permisos al rol administrador
+        $allPermissions = Permission::where('guard_name', 'api')->pluck('id')->toArray();
+        $adminRole->permissions()->sync($allPermissions);
+        $userRole->permissions()->sync($allPermissions);
     }
 }

@@ -10,7 +10,6 @@ class ctl_departamento extends Model
     use SoftDeletes;
     protected $table = 'ctl_departamento';
     protected $fillable = [
-        'id',
         'nombre',
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];

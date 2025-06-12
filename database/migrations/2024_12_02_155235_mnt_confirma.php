@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('folio');
             $table->integer('year');
             $table->date('fecha_confirma');
-            $table->unsignedBigInteger('persona_id')->nullable();
-            $table->foreign('persona_id')->references('id')->on('mnt_persona');
+            $table->string('persona_id');
+            $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
             $table->timestamps();
             $table->softDeletes();
 

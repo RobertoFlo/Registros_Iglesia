@@ -33,18 +33,18 @@ class PersonaRequest extends Request
 
         ];
     }
-    public function updateRules() : array
-    {
-        return [
-            'primer_nombre' => 'required',
-            'segundo_nombre' => 'required',
-            'primer_apellido' => 'required',
-            'segundo_apellido' => 'required',
-            'domicilio' => 'required',
-            'fecha_nacimiento' => 'required',
-            'departamento_id' => 'required',
-            'municipio_id' => 'required',
-            'distrito_id' => 'required',
-        ];
-    }
+    // public function updateRules() : array
+    // {
+    //     return [
+    //         'primer_nombre' => 'required',
+    //         'segundo_nombre' => 'required',
+    //         'primer_apellido' => 'required',
+    //         'segundo_apellido' => 'required',
+    //         'domicilio' => 'required',
+    //         'fecha_nacimiento' => 'required',
+    //         'departamento_id' => 'required',
+    //         'municipio_id' => 'required',
+    //         'distrito_id' => 'required',
+    //     ];
+    // }
 }

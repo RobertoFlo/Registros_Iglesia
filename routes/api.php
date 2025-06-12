@@ -16,7 +16,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::post('/login-app',[AuthController::class,'login']);
+Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 
 // Route::view('/email/verified', 'verifyEmail')->name('email.verified');
@@ -35,9 +35,15 @@ Route::post('/register',[AuthController::class,'register']);
 //          // return response()->json(['message' => 'Correo verificado con éxito']);
 // })->middleware(['auth', 'signed'])->name('verification.verify');
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return response()->json($request->user());
+    $user = $request->user();
+    $roles = $user->roles()->pluck('name');
+    $permissions = $user->getAllPermissions()->pluck('name');
+    return response()->json([
+        'user' => $user->name,
+        'roles' => $roles,
+        'permissions' => $permissions,
+    ]);
 });
 
 

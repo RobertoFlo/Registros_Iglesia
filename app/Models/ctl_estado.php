@@ -6,21 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
-class Gasto extends Model
+class ctl_estado extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $table = 'mnt_gasto';
+    protected $table = 'ctl_estados';
     protected $fillable = [
-        'fecha',
-        'descripcion',
-        'monto',
-        'tipo_id',
+        'nombre',
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-    public function Tipo()
+    public function persona()
     {
-        return $this->belongsTo(ctl_gasto::class, 'tipo_id')->withTrashed();
+        return $this->hasOne(persona::class, 'estado_id')->withTrashed();
     }
 }

@@ -11,8 +11,8 @@ use Illuminate\Support\Str;
 
 class Personacontroller extends Controller
 {
-    protected $model = Persona::class;
-   protected $request = PersonaRequest::class;
+protected $model = Persona::class;
+protected $request = PersonaRequest::class;
 
 
     public function sortableBy(): array
@@ -26,10 +26,20 @@ class Personacontroller extends Controller
         @param Model $entity
 
      */
-    protected function afterStore($request, Model $entity):void
+
+    // protected function resolveResourceQuery($resourceId)
+    // {
+    //     return Persona::where('uuid', $resourceId);
+    // }
+    protected function beforeStore($request, Model $entity): void
     {
-        $uuid = Str::uuid();
-        $entity->uuid =$uuid;
+        $entity->estado_id = 1; // Asignar estado por defecto
+        $entity->uuid = Str::uuid(); // Generar UUID
+    }
+
+    protected function beforeUpdate($request, Model $entity): void
+    {
+        dd($entity);
     }
 
 

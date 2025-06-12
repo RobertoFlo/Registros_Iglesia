@@ -14,8 +14,11 @@ class Persona extends Model
     use HasApiTokens, HasFactory,SoftDeletes, Notifiable;
 
     protected $table = 'mnt_persona';
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'id',
         'uuid',
         'user_id',
         'primer_nombre',
@@ -29,6 +32,7 @@ class Persona extends Model
         'departamento_id',
         'municipio_id',
         'distrito_id',
+        'estado_id',
 
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
@@ -60,5 +64,9 @@ class Persona extends Model
     public function matrimonio()
     {
         return $this->hasOne(mnt_boda::class, 'persona_id')->withTrashed();
+    }
+    public function estado()
+    {
+        //return $this->belongsTo(ctl_distritos::class, 'estado_id')->withTrashed();
     }
 }

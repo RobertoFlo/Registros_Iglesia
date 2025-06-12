@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('mnt_detalle_boda', function (Blueprint $table) {
+        Schema::create('ctl_estados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_testigo', length: 150);
-            $table->string('persona_id');
-            $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
-            $table->unsignedBigInteger('boda_id');
-            $table->foreign('boda_id')->references('id')->on('mnt_boda');
+            $table->string('estado', length: 50);
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -30,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        schema::drop('mnt_detalle_boda');
-
+        schema::drop('ctl_estados');
     }
 };

@@ -13,7 +13,6 @@ class mnt_confirma extends Model
 
     protected $table = 'mnt_confirma';
     protected $fillable = [
-        'id',
         'padre_confirma',
         'comentarios',
         'libro',

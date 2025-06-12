@@ -23,8 +23,12 @@ class AuthController extends Controller
         ]);
         $user = User::where('email', request()->email)->first();
         if ($user &&  Hash::check(request()->password, $user->password)) {
+            $roles = $user->roles()->pluck('name');
+            $permissions = $user->getAllPermissions()->pluck('name');
             return response()->json([
-                'user' => $user,
+                'user' => $user->name,
+                'roles' => $roles,
+                'permissions' => $permissions,
                 'Bearer' => $user->createToken($user->name)->plainTextToken,
             ]);
         } else {
@@ -39,9 +43,10 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
+            $user->deleted_at = now();
             $user->save();
 
-            $persona = Persona::create([
+            Persona::create([
                 'primer_nombre' => $request->primer_nombre,
                 'segundo_nombre' => $request->segundo_nombre,
                 'primer_apellido' => $request->primer_apellido,
@@ -55,13 +60,17 @@ class AuthController extends Controller
                 'uuid' => Str::uuid(),
                 'nombre_madre' => $request->nombre_madre,
                 'nombre_padre' => $request->nombre_padre,
+                'estado_id' => 1,
+                'deleted_at' => now(),
             ]);
 
+          //  $user->assignRole('usuario');
+
             DB::commit();
-            return response()->json(['user' => $user]);
+            return response()->json(['message' =>'Solicitud enviada correctamente'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Error al registrar usuario', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Error al registrar solicitud', 'error' => $e->getMessage()], 500);
         }
     }
     public function logout(Request $request): JsonResponse

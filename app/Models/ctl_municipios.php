@@ -13,7 +13,6 @@ class ctl_municipios extends Model
 
     protected $table = 'ctl_municipio';
     protected $fillable = [
-        'id',
         'nombre',
         'departamento_id'
     ];

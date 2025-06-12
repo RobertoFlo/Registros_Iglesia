@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\datosprueba;
 use Database\Seeders\Tipogastos;
+use Database\Seeders\PermissionsTableSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,10 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call([
             datosprueba::class,
             Tipogastos::class,
+            PermissionsTableSeeder::class,
+            ctl_persona_estado::class,
+            persona_rol::class,
 
         ]);
 

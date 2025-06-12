@@ -13,7 +13,6 @@ class ctl_gasto extends Model
 
     protected $table = 'ctl_tipo_gasto';
     protected $fillable = [
-        'id',
         'nombre',
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
