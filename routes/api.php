@@ -36,7 +36,8 @@ Route::post('/register',[AuthController::class,'register']);
 // })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    $user = $request->user();
+    try{
+ $user = $request->user();
     $roles = $user->roles()->pluck('name');
     $permissions = $user->getAllPermissions()->pluck('name');
     return response()->json([
@@ -44,6 +45,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         'roles' => $roles,
         'permissions' => $permissions,
     ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Unauthorized',
+            'message' => $e->getMessage(),
+        ], 401);
+    }
+
 });
 
 
@@ -63,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Orion::resource('municipios', Municipiocontroller::class);
     Orion::resource('distritos', DistritoController::class);
     Orion::resource('persona', Personacontroller::class);
-    Orion::resource('bautizo', Bautizocontroller::class);
+    Orion::resource('bautizo', Bautizocontroller::class)->only('index', 'show', 'store', 'update', 'destroy', 'restore')->withSoftDeletes();;
     Orion::resource('confirma', Confirmacontroller::class);
     Orion::resource('finanza', Finanzascontroller::class);
     Orion::resource('matrimonio', Bodacontroller::class);

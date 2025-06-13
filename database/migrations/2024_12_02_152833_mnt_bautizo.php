@@ -21,8 +21,9 @@ return new class extends Migration
             $table->integer('libro');
             $table->integer('folio');
             $table->integer('year');
-            $table->string('persona_id');
-            $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
+            $table->unsignedBigInteger('persona_id');
+            // $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
+            $table->foreign('persona_id')->references('id')->on('mnt_persona');
             $table->timestamps();
             $table->softDeletes();
 

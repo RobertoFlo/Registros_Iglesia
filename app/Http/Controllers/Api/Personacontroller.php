@@ -11,9 +11,20 @@ use Illuminate\Support\Str;
 
 class Personacontroller extends Controller
 {
-protected $model = Persona::class;
-protected $request = PersonaRequest::class;
+    protected $model = Persona::class;
+    protected $request = PersonaRequest::class;
 
+
+    /**
+     * The name of the route key for model binding.
+     * By default, it uses the primary key name.
+     *
+     * @return string
+     */
+    public function keyName(): string
+    {
+        return 'uuid';
+    }
 
     public function sortableBy(): array
     {
@@ -27,20 +38,16 @@ protected $request = PersonaRequest::class;
 
      */
 
-    // protected function resolveResourceQuery($resourceId)
-    // {
-    //     return Persona::where('uuid', $resourceId);
-    // }
     protected function beforeStore($request, Model $entity): void
     {
         $entity->estado_id = 1; // Asignar estado por defecto
         $entity->uuid = Str::uuid(); // Generar UUID
     }
 
-    protected function beforeUpdate($request, Model $entity): void
-    {
-        dd($entity);
-    }
+    // protected function beforeUpdate($request, Model $entity): void
+    // {
+    //     //dd($entity);
+    // }
 
 
 }

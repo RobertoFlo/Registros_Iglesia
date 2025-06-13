@@ -14,9 +14,9 @@ class Persona extends Model
     use HasApiTokens, HasFactory,SoftDeletes, Notifiable;
 
     protected $table = 'mnt_persona';
-    protected $primaryKey = 'uuid';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    // protected $primaryKey = 'uuid';
+    // public $incrementing = false;
+    // protected $keyType = 'string';
 
     protected $fillable = [
         'uuid',

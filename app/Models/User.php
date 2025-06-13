@@ -55,4 +55,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(persona::class, 'user_id')->withTrashed();
     }
+    protected string $guard_name = 'sanctum';// eso es para que funcione con sanctum en los permisos de Spatie
 }

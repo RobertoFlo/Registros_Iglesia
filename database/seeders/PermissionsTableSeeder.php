@@ -50,7 +50,7 @@ class PermissionsTableSeeder extends Seeder
         foreach ($permiso_1 as $permiso) {
             Permission::firstOrCreate([
                 'name' => $permiso,
-                'guard_name' => 'api',
+                'guard_name' => 'sanctum',
                 'group_id' => $grupo_1->id,
             ]);
         }
@@ -58,7 +58,7 @@ class PermissionsTableSeeder extends Seeder
         foreach ($permiso_2 as $permiso) {
             Permission::firstOrCreate([
                 'name' => $permiso,
-                'guard_name' => 'api',
+                'guard_name' => 'sanctum',
                 'group_id' => $grupo_2->id,
             ]);
         }
@@ -66,7 +66,7 @@ class PermissionsTableSeeder extends Seeder
         foreach ($permiso_3 as $permiso) {
             Permission::firstOrCreate([
                 'name' => $permiso,
-                'guard_name' => 'api',
+                'guard_name' => 'sanctum',
                 'group_id' => $grupo_3->id,
             ]);
         }
@@ -74,23 +74,31 @@ class PermissionsTableSeeder extends Seeder
         foreach ($permiso_4 as $permiso) {
             Permission::firstOrCreate([
                 'name' => $permiso,
-                'guard_name' => 'api',
+                'guard_name' => 'sanctum',
                 'group_id' => $grupo_4->id,
             ]);
         }
         // Crear roles
         $adminRole = Role::firstOrCreate([
             'name' => 'administrador',
-            'guard_name' => 'api',
+            'guard_name' => 'sanctum',
         ]);
         $userRole = Role::firstOrCreate([
             'name' => 'usuario',
-            'guard_name' => 'api',
+            'guard_name' => 'sanctum',
         ]);
 
+        try{
+            // Asignar permisos a los roles
+            $adminRole->syncPermissions(Permission::all());
+            $userRole->syncPermissions(Permission::all());
+        }catch (\Exception $e){
+            // Manejo de excepciones si ocurre un error al asignar permisos
+            dd('Error al asignar permisos a los roles: ' . $e->getMessage());
+        }
         // Asignar todos los permisos al rol administrador
-        $allPermissions = Permission::where('guard_name', 'api')->pluck('id')->toArray();
-        $adminRole->permissions()->sync($allPermissions);
-        $userRole->permissions()->sync($allPermissions);
+        // $allPermissions = Permission::where('guard_name', 'sanctum')->pluck('name')->toArray();
+        // $adminRole->permissions()->sync($allPermissions);
+        // $userRole->permissions()->sync($allPermissions);
     }
 }

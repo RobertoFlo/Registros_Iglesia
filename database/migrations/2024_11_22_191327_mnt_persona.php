@@ -13,8 +13,8 @@ return new class extends Migration
     {
         //Persona
         Schema::create('mnt_persona', function (Blueprint $table) {
-            // $table->id();
-            $table->string('uuid')->unique()->primary();
+            $table->id();
+            $table->string('uuid')->unique();
             $table->string('primer_nombre', length: 100);
             $table->string('segundo_nombre', length: 100);
             $table->string('primer_apellido', length: 100);

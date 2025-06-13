@@ -5,6 +5,8 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\mnt_bautizo;
 use Illuminate\Auth\Access\Response;
+use Spatie\Permission\Models\Role;
+
 
 class BautizoPolicy
 {
@@ -31,7 +33,17 @@ class BautizoPolicy
      */
     public function create(User $user): bool
     {
-            return $user->can('bautizo.create');
+    //     $role = Role::findByName('administrador', 'api');
+          // dd($role->permissions->pluck('name'));
+           // return $user->hasPermissionTo('bautizo.create', 'api');
+    //       dd([
+    //     'user' => $user->email,
+    //     'roles' => $user->getRoleNames(),
+    //     'permissions' => $user->getAllPermissions()->pluck('name'),
+    //     'can' => $user->can('bautizo.create'),
+    //     'hasPermissionTo' => $user->hasPermissionTo('bautizo.create', 'api'),
+    // ]);
+        return  $user->can('bautizo.create');
 
     }
 

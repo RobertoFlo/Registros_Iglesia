@@ -15,8 +15,9 @@ return new class extends Migration
         Schema::create('mnt_detalle_boda', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_testigo', length: 150);
-            $table->string('persona_id');
-            $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
+            $table->unsignedBigInteger('persona_id');
+            // $table->foreign('persona_id')->references('uuid')->on('mnt_persona');
+            $table->foreign('persona_id')->references('id')->on('mnt_persona');
             $table->unsignedBigInteger('boda_id');
             $table->foreign('boda_id')->references('id')->on('mnt_boda');
             $table->timestamps();

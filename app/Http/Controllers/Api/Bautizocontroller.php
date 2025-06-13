@@ -20,6 +20,7 @@ class Bautizocontroller extends Controller
     /**
     * @var string $request
     */
+    
    protected $request = BautizoStorePostRequest::class;
     /**
     * @var string $policy
