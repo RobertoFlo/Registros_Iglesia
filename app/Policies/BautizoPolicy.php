@@ -16,7 +16,7 @@ class BautizoPolicy
     public function viewAny(User $user): bool
     {
         //
-        return false;
+        return $user->can('bautizo.view');
     }
 
     /**

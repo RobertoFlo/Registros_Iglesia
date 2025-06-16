@@ -28,30 +28,35 @@ class PermissionsTableSeeder extends Seeder
             'boda.view',
             'boda.update',
             'boda.delete',
+            'boda.restore',
         ];
         $permiso_2 = [
             'finanzas.create',
             'finanzas.view',
             'finanzas.update',
             'finanzas.delete',
+            'finanzas.restore',
         ];
         $permiso_3 = [
             'bautizo.create',
             'bautizo.view',
             'bautizo.update',
             'bautizo.delete',
+            'bautizo.restore',
         ];
         $permiso_4 = [
             'confirma.create',
             'confirma.view',
             'confirma.update',
             'confirma.delete',
+            'confirma.restore',
         ];
          $permiso_5 = [
             'persona.create',
             'persona.view',
             'persona.update',
             'persona.delete',
+            'persona.restore',
         ];
 
 

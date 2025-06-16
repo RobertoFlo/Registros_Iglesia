@@ -33,9 +33,10 @@ class Persona extends Model
         'municipio_id',
         'distrito_id',
         'estado_id',
+        'deleted_at'
 
     ];
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function departamento()
     {

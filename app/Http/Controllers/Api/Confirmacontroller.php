@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\mnt_confirma;
 use App\Http\Requests\ConfirmaRequest;
 use App\Policies\ConfirmaPolicy;
+use Illuminate\Database\Eloquent\Model;
 
 
 class Confirmacontroller extends Controller
@@ -33,6 +34,13 @@ class Confirmacontroller extends Controller
         return ['created_at'];
     }
 
-    
+
+    protected function beforeDestroy($request, Model $entity)
+    {
+        // dd($entity);
+        $entity->deleted_at = now(); // Asignar fecha de eliminación
+        $entity->save();
+    }
+
 
 }

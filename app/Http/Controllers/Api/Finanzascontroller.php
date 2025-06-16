@@ -7,6 +7,7 @@ use Orion\Http\Controllers\Controller;
 use App\Models\Gasto;
 use App\Http\Requests\FinanzasRequest;
 use App\Policies\FinanzasPolicy;
+use Illuminate\Database\Eloquent\Model;
 
 
 
@@ -33,4 +34,12 @@ class Finanzascontroller extends Controller
     {
         return ['Tipo'];
     }
+
+    protected function beforeDestroy($request, Model $entity)
+    {
+        // dd($entity);
+        $entity->deleted_at = now(); // Asignar fecha de eliminación
+        $entity->save();
+    }
+
 }

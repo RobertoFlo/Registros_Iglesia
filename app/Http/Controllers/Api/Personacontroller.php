@@ -44,6 +44,14 @@ class Personacontroller extends Controller
         $entity->uuid = Str::uuid(); // Generar UUID
     }
 
+    protected function beforeDestroy($request, Model $entity)
+    {
+        // dd($entity);
+        $entity->deleted_at = now();
+        // $user =$entity->user_id  // Asignar fecha de eliminación
+        $entity->save();
+    }
+
 
 
 }

@@ -17,6 +17,7 @@ class mnt_detalle_boda extends Model
         'nombre_testigo',
         'persona_id',
         'boda_id',
+        'deleted_at'
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     public function Boda()

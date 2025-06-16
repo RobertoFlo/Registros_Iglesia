@@ -20,8 +20,9 @@ class mnt_confirma extends Model
         'year',
         'fecha_confirma',
         'persona_id',
+        'deleted_at'
     ];
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['created_at', 'updated_at'];
     public function Persona()
     {
         return $this->belongsTo(Persona::class, 'persona_id')->withTrashed();

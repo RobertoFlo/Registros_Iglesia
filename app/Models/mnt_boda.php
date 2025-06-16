@@ -18,8 +18,9 @@ class mnt_boda extends Model
         'folio',
         'anios_libro',
         'fecha_declaracion',
+        'deleted_at'
     ];
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function Detalle()
     {

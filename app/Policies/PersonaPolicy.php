@@ -79,8 +79,6 @@ class PersonaPolicy
      */
     public function forceDelete(User $user, Persona $persona): bool
     {
-        //
         return false;
-
     }
 }
