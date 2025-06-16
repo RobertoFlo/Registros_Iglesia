@@ -16,7 +16,7 @@ class BautizoPolicy
     public function viewAny(User $user): bool
     {
         //
-        return true;
+        return false;
     }
 
     /**
@@ -24,7 +24,7 @@ class BautizoPolicy
      */
     public function view(User $user, mnt_bautizo $mntBautizo): bool
     {
-        return true;
+        return $user->can('bautizo.view');
 
     }
 
@@ -33,16 +33,7 @@ class BautizoPolicy
      */
     public function create(User $user): bool
     {
-    //     $role = Role::findByName('administrador', 'api');
-          // dd($role->permissions->pluck('name'));
-           // return $user->hasPermissionTo('bautizo.create', 'api');
-    //       dd([
-    //     'user' => $user->email,
-    //     'roles' => $user->getRoleNames(),
-    //     'permissions' => $user->getAllPermissions()->pluck('name'),
-    //     'can' => $user->can('bautizo.create'),
-    //     'hasPermissionTo' => $user->hasPermissionTo('bautizo.create', 'api'),
-    // ]);
+
         return  $user->can('bautizo.create');
 
     }
@@ -53,7 +44,7 @@ class BautizoPolicy
     public function update(User $user, mnt_bautizo $mntBautizo): bool
     {
 
-        return true;
+        return $user->can('bautizo.update');
 
     }
 
@@ -62,7 +53,7 @@ class BautizoPolicy
      */
     public function delete(User $user, mnt_bautizo $mntBautizo): bool
     {
-        return true;
+        return $user->can('bautizo.delete');
         //
     }
 
@@ -71,7 +62,7 @@ class BautizoPolicy
      */
     public function restore(User $user, mnt_bautizo $mntBautizo): bool
     {
-        return true;
+        return $user->can('bautizo.restore');
         //
     }
 
@@ -80,7 +71,7 @@ class BautizoPolicy
      */
     public function forceDelete(User $user, mnt_bautizo $mntBautizo): bool
     {
-        return true;
+        return false;
         //
     }
 }

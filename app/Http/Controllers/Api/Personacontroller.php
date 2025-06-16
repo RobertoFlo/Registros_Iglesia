@@ -44,10 +44,6 @@ class Personacontroller extends Controller
         $entity->uuid = Str::uuid(); // Generar UUID
     }
 
-    // protected function beforeUpdate($request, Model $entity): void
-    // {
-    //     //dd($entity);
-    // }
 
 
 }

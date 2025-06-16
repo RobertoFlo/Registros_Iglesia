@@ -14,7 +14,7 @@ class MatrimonioPolicy
     public function viewAny(User $user): bool
     {
         //
-        return true;
+        return false;
     }
 
     /**
@@ -23,7 +23,7 @@ class MatrimonioPolicy
     public function view(User $user, mnt_boda $mntBoda): bool
     {
         //
-        return true;
+        return $user->can('mnt_boda.view');
 
     }
 
@@ -33,7 +33,7 @@ class MatrimonioPolicy
     public function create(User $user): bool
     {
         //
-        return true;
+        return $user->can('mnt_boda.create');
 
     }
 
@@ -43,7 +43,7 @@ class MatrimonioPolicy
     public function update(User $user, mnt_boda $mntBoda): bool
     {
         //
-        return true;
+        return $user->can('mnt_boda.update');
 
     }
 
@@ -53,7 +53,7 @@ class MatrimonioPolicy
     public function delete(User $user, mnt_boda $mntBoda): bool
     {
         //
-        return true;
+        return $user->can('mnt_boda.delete');
 
     }
 
@@ -63,7 +63,7 @@ class MatrimonioPolicy
     public function restore(User $user, mnt_boda $mntBoda): bool
     {
         //
-        return true;
+        return $user->can('mnt_boda.restore');
 
     }
 
@@ -73,7 +73,7 @@ class MatrimonioPolicy
     public function forceDelete(User $user, mnt_boda $mntBoda): bool
     {
         //
-        return true;
+        return false;
 
     }
 }

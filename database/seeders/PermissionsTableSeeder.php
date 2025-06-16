@@ -20,6 +20,7 @@ class PermissionsTableSeeder extends Seeder
         $grupo_2 = PermissionGroup::firstOrCreate(['name' => 'gasto']);
         $grupo_3 = PermissionGroup::firstOrCreate(['name' => 'bautizo']);
         $grupo_4 = PermissionGroup::firstOrCreate(['name' => 'confirma']);
+        $grupo_5 = PermissionGroup::firstOrCreate(['name' => 'persona']);
 
         // Permisos por grupos
         $permiso_1 = [
@@ -29,10 +30,10 @@ class PermissionsTableSeeder extends Seeder
             'boda.delete',
         ];
         $permiso_2 = [
-            'gasto.create',
-            'gasto.view',
-            'gasto.update',
-            'gasto.delete',
+            'finanzas.create',
+            'finanzas.view',
+            'finanzas.update',
+            'finanzas.delete',
         ];
         $permiso_3 = [
             'bautizo.create',
@@ -46,6 +47,13 @@ class PermissionsTableSeeder extends Seeder
             'confirma.update',
             'confirma.delete',
         ];
+         $permiso_5 = [
+            'persona.create',
+            'persona.view',
+            'persona.update',
+            'persona.delete',
+        ];
+
 
         foreach ($permiso_1 as $permiso) {
             Permission::firstOrCreate([
@@ -78,6 +86,13 @@ class PermissionsTableSeeder extends Seeder
                 'group_id' => $grupo_4->id,
             ]);
         }
+        foreach ($permiso_5 as $permiso) {
+            Permission::firstOrCreate([
+                'name' => $permiso,
+                'guard_name' => 'sanctum',
+                'group_id' => $grupo_5->id,
+            ]);
+        }
         // Crear roles
         $adminRole = Role::firstOrCreate([
             'name' => 'administrador',
@@ -96,9 +111,6 @@ class PermissionsTableSeeder extends Seeder
             // Manejo de excepciones si ocurre un error al asignar permisos
             dd('Error al asignar permisos a los roles: ' . $e->getMessage());
         }
-        // Asignar todos los permisos al rol administrador
-        // $allPermissions = Permission::where('guard_name', 'sanctum')->pluck('name')->toArray();
-        // $adminRole->permissions()->sync($allPermissions);
-        // $userRole->permissions()->sync($allPermissions);
+
     }
 }

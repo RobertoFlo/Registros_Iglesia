@@ -14,7 +14,7 @@ class PersonaPolicy
     public function viewAny(User $user): bool
     {
         //
-        return true;
+        return false;
     }
 
     /**
@@ -23,7 +23,7 @@ class PersonaPolicy
     public function view(User $user, Persona $persona): bool
     {
         //
-        return true;
+        return $user->can('persona.view');
 
     }
 
@@ -33,7 +33,14 @@ class PersonaPolicy
     public function create(User $user): bool
     {
         //
-        return true;
+    //             dd([
+    //     'user' => $user->email,
+    //     'roles' => $user->getRoleNames(),
+    //     'permissions' => $user->getAllPermissions()->pluck('name'),
+    //     'can' => $user->can('bautizo.create'),
+    //     'hasPermissionTo' => $user->hasPermissionTo('bautizo.create'),
+    // ]);
+        return $user->can('persona.create');
 
     }
 
@@ -43,7 +50,7 @@ class PersonaPolicy
     public function update(User $user, Persona $persona): bool
     {
         //
-        return true;
+        return $user->can('persona.update');
 
     }
 
@@ -53,7 +60,7 @@ class PersonaPolicy
     public function delete(User $user, Persona $persona): bool
     {
         //
-        return true;
+        return $user->can('persona.delete');
 
     }
 
@@ -63,7 +70,7 @@ class PersonaPolicy
     public function restore(User $user, Persona $persona): bool
     {
         //
-        return true;
+        return $user->can('persona.restore');
 
     }
 
@@ -73,7 +80,7 @@ class PersonaPolicy
     public function forceDelete(User $user, Persona $persona): bool
     {
         //
-        return true;
+        return false;
 
     }
 }

@@ -14,7 +14,7 @@ class FinanzasPolicy
     public function viewAny(User $user): bool
     {
         //
-        return true;
+        return false;
     }
 
     /**
@@ -23,7 +23,7 @@ class FinanzasPolicy
     public function view(User $user, Gasto $mntGasto): bool
     {
         //
-        return true;
+        return $user->can('finanzas.view');
 
     }
 
@@ -33,7 +33,7 @@ class FinanzasPolicy
     public function create(User $user): bool
     {
         //
-        return true;
+        return $user->can('finanzas.create');
 
     }
 
@@ -43,7 +43,7 @@ class FinanzasPolicy
     public function update(User $user, Gasto $mntGasto): bool
     {
         //
-        return true;
+        return $user->can('finanzas.update');
 
     }
 
@@ -53,7 +53,7 @@ class FinanzasPolicy
     public function delete(User $user, Gasto $mntGasto): bool
     {
         //
-        return true;
+        return $user->can('finanzas.delete');
 
     }
 
@@ -62,7 +62,7 @@ class FinanzasPolicy
      */
     public function restore(User $user, Gasto $mntGasto): bool
     {
-        return true;
+        return $user->can('finanzas.restore');
         //
     }
 
@@ -71,7 +71,7 @@ class FinanzasPolicy
      */
     public function forceDelete(User $user, Gasto $mntGasto): bool
     {
-        return true;
+        return false;
         //
     }
 }

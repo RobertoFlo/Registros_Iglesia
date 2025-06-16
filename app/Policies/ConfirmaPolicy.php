@@ -13,7 +13,7 @@ class ConfirmaPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return false;
         //
     }
 
@@ -22,7 +22,7 @@ class ConfirmaPolicy
      */
     public function view(User $user, mnt_confirma $mntConfirma): bool
     {
-        return true;
+        return $user->can('mnt_confirma.view');
         //
     }
 
@@ -31,7 +31,7 @@ class ConfirmaPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('mnt_confirma.create');
         //
     }
 
@@ -40,7 +40,7 @@ class ConfirmaPolicy
      */
     public function update(User $user, mnt_confirma $mntConfirma): bool
     {
-        return true;
+        return $user->can('mnt_confirma.update');
         //
     }
 
@@ -49,7 +49,7 @@ class ConfirmaPolicy
      */
     public function delete(User $user, mnt_confirma $mntConfirma): bool
     {
-        return true;
+        return $user->can('mnt_confirma.delete');
         //
     }
 
@@ -58,7 +58,7 @@ class ConfirmaPolicy
      */
     public function restore(User $user, mnt_confirma $mntConfirma): bool
     {
-        return true;
+        return $user->can('mnt_confirma.restore');
         //
     }
 
@@ -67,7 +67,7 @@ class ConfirmaPolicy
      */
     public function forceDelete(User $user, mnt_confirma $mntConfirma): bool
     {
-        return true;
+        return false;
         //
     }
 }
