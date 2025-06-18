@@ -82,35 +82,3 @@ class RoleController extends Controller
     }
 }
 
-
-/**
- * -----------------------------------------------------------------
- * ¿Cómo usar esto?
- * -----------------------------------------------------------------
- *
- * 1. Crea el controlador:
- * php artisan make:controller RoleController
- *
- * 2. Pega el código de arriba en el archivo `app/Http/Controllers/RoleController.php`.
- *
- * 3. Añade las rutas en tu archivo `routes/api.php`:
- *
- * use App\Http\Controllers\RoleController;
- *
- * // Ruta para que el frontend obtenga la lista de todos los permisos
- * Route::get('/permissions', [RoleController::class, 'listPermissions'])->middleware('auth:sanctum');
- *
- * // Ruta para crear un nuevo rol y asignarle permisos
- * Route::post('/roles', [RoleController::class, 'store'])->middleware('auth:sanctum');
- *
- * 4. Desde tu frontend (Angular), primero haces una petición GET a `/api/permissions`
- * para mostrarle al usuario todos los permisos.
- *
- * 5. Cuando el usuario escriba el nombre del rol y seleccione los permisos,
- * haces una petición POST a `/api/roles` con el siguiente cuerpo (body):
- *
- * {
- * "name": "Nuevo Rol de Prueba",
- * "permissions": [1, 3, 5] // Array con los IDs de los permisos seleccionados
- * }
- */

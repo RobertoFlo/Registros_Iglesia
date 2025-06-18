@@ -8,9 +8,8 @@ use App\Models\mnt_boda;
 use App\Models\mnt_detalle_boda;
 use App\Http\Requests\MatrimonioRequest;
 use App\Policies\MatrimonioPolicy;
-use Orion\Http\Requests\Request as RequestsRequest;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
 class Bodacontroller extends Controller
 {
     /**
@@ -59,7 +58,18 @@ class Bodacontroller extends Controller
             $testigo_1->save();
             $testigo_2->save();
         }
+    }
+      protected function beforeDestroy($request, Model $entity)
+    {
+        $entity->deleted_at = now(); // Asignar fecha de eliminación
+        $entity->save();
+    }
 
+    protected function buildIndexFetchQuery($request, array $requestedRelations): Builder
+    {
+        $query = parent::buildShowFetchQuery($request, $requestedRelations);
+        $query->withTrashed();
+        return $query;
     }
 
 }

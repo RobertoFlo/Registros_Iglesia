@@ -21,17 +21,15 @@ class FinanzasRequest extends Request
         return [
             'descripcion' => 'required|max:150|min:2',
             'monto' => 'required|decimal:2',
-            'fecha' => 'required',
+            'fecha' => 'required|date',
             'tipo_id' => 'required|exists:ctl_tipo_gasto,id',
         ];
     }
     public function updateRules() : array
     {
         return [
-           'descripcion' => 'required|max:150|min:2',
-            'monto' => 'required|decimal:2',
-            'fecha' => 'required',
-
-        ];
+           'descripcion' => 'max:150|min:2',
+            'monto' => 'decimal:2',
+            'fecha' => 'date',];
     }
 }

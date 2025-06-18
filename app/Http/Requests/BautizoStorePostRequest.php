@@ -34,18 +34,18 @@ class BautizoStorePostRequest extends Request
             'year' => 'required',
         ];
     }
-    public function updateRules() : array
-    {
-        return [
-            //
-            'padre_bautizo' => 'required',
-            'nombre_madrina' => 'required',
-            'nombre_padrino' => 'required',
-            'comentarios' => 'required',
-            'fecha_bautizo' => 'required',
-            'libro' => 'required',
-            'folio' => 'required',
-            'year' => 'required',
-        ];
-    }
+    // public function updateRules() : array
+    // {
+    //     return [
+    //         //
+    //         'padre_bautizo' => 'required',
+    //         'nombre_madrina' => 'required',
+    //         'nombre_padrino' => 'required',
+    //         'comentarios' => 'required',
+    //         'fecha_bautizo' => 'required',
+    //         'libro' => 'required',
+    //         'folio' => 'required',
+    //         'year' => 'required',
+    //     ];
+    // }
 }

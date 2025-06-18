@@ -21,30 +21,30 @@ class PersonaRequest extends Request
     public function storeRules() : array
     {
         return [
-            'primer_nombre' => 'required',
-            'segundo_nombre' => 'required',
-            'primer_apellido' => 'required',
-            'segundo_apellido' => 'required',
-            'domicilio' => 'required',
-            'fecha_nacimiento' => 'required',
-            'departamento_id' => 'required',
-            'municipio_id' => 'required',
-            'distrito_id' => 'required',
+            'primer_nombre' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'segundo_nombre' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'primer_apellido' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'segundo_apellido' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'domicilio' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'fecha_nacimiento' => 'required|date',
+            'departamento_id' => 'required|numeric|exists:ctl_departamentos,id',
+            'municipio_id' => 'required|numeric|exists:ctl_municipios,id',
+            'distrito_id' => 'required|numeric|exists:ctl_distritos,id',
 
         ];
     }
-    // public function updateRules() : array
-    // {
-    //     return [
-    //         'primer_nombre' => 'required',
-    //         'segundo_nombre' => 'required',
-    //         'primer_apellido' => 'required',
-    //         'segundo_apellido' => 'required',
-    //         'domicilio' => 'required',
-    //         'fecha_nacimiento' => 'required',
-    //         'departamento_id' => 'required',
-    //         'municipio_id' => 'required',
-    //         'distrito_id' => 'required',
-    //     ];
-    // }
+    public function updateRules() : array
+    {
+        return [
+            'primer_nombre' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'segundo_nombre' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'primer_apellido' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'segundo_apellido' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'domicilio' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
+            'fecha_nacimiento' => 'date',
+            'departamento_id' => 'numeric|exists:ctl_departamentos,id',
+            'municipio_id' => 'numeric|exists:ctl_municipios,id',
+            'distrito_id' => 'numeric|exists:ctl_distritos,id',
+        ];
+    }
 }

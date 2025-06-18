@@ -8,6 +8,7 @@ use App\Models\mnt_confirma;
 use App\Http\Requests\ConfirmaRequest;
 use App\Policies\ConfirmaPolicy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class Confirmacontroller extends Controller
@@ -40,6 +41,12 @@ class Confirmacontroller extends Controller
         // dd($entity);
         $entity->deleted_at = now(); // Asignar fecha de eliminación
         $entity->save();
+    }
+    protected function buildIndexFetchQuery($request, array $requestedRelations): Builder
+    {
+        $query = parent::buildShowFetchQuery($request, $requestedRelations);
+        $query->withTrashed();
+        return $query;
     }
 
 

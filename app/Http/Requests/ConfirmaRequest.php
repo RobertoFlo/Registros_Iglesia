@@ -29,15 +29,15 @@ class ConfirmaRequest extends Request
             'year' => 'required',
         ];
     }
-    public function updateRules() : array
-    {
-        return [
-            //
-            'padre_confirma' => 'required',
-            'fecha_confirma' => 'required',
-            'libro' => 'required',
-            'folio' => 'required',
-            'year' => 'required',
-        ];
-    }
+    // public function updateRules() : array
+    // {
+    //     return [
+    //         //
+    //         'padre_confirma' => 'required',
+    //         'fecha_confirma' => 'required',
+    //         'libro' => 'required',
+    //         'folio' => 'required',
+    //         'year' => 'required',
+    //     ];
+    // }
 }
