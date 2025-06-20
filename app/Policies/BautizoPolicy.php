@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\mnt_bautizo;
 use Illuminate\Auth\Access\Response;
-use Spatie\Permission\Models\Role;
 
 
 class BautizoPolicy
