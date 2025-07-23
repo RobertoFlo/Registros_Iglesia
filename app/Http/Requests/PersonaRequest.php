@@ -27,9 +27,9 @@ class PersonaRequest extends Request
             'segundo_apellido' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
             'domicilio' => 'required|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
             'fecha_nacimiento' => 'required|date',
-            'departamento_id' => 'required|numeric|exists:ctl_departamentos,id',
-            'municipio_id' => 'required|numeric|exists:ctl_municipios,id',
-            'distrito_id' => 'required|numeric|exists:ctl_distritos,id',
+            'departamento_id' => 'required|numeric|exists:ctl_departamento,id',
+            'municipio_id' => 'required|numeric|exists:ctl_municipio,id',
+            'distrito_id' => 'required|numeric|exists:ctl_distrito,id',
 
         ];
     }
@@ -42,9 +42,9 @@ class PersonaRequest extends Request
             'segundo_apellido' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
             'domicilio' => 'string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/|max:50|min:2',
             'fecha_nacimiento' => 'date',
-            'departamento_id' => 'numeric|exists:ctl_departamentos,id',
-            'municipio_id' => 'numeric|exists:ctl_municipios,id',
-            'distrito_id' => 'numeric|exists:ctl_distritos,id',
+            'departamento_id' => 'numeric|exists:ctl_departamento,id',
+            'municipio_id' => 'numeric|exists:ctl_municipio,id',
+            'distrito_id' => 'numeric|exists:ctl_distrito,id',
         ];
     }
 }

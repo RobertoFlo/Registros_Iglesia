@@ -81,4 +81,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/permissions', [RoleController::class, 'listPermissions'])->middleware('auth:sanctum');
 Route::post('/roles', [RoleController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/roles/{id}/report-pdf', [App\Http\Controllers\Api\RoleController::class, 'generateReportPdf'])->middleware('auth:sanctum');
-Route::get('/bautizo/{id}/report-pdf', [App\Http\Controllers\Api\BautizoController::class, 'BautizoReportPdf'])->middleware('auth:sanctum');
+Route::get('/bautizo/{id}/report-pdf', [App\Http\Controllers\ReportsController::class, 'BautizoReportPdf'])->middleware('auth:sanctum');
+Route::get('/matrimonio/{id}/report-pdf', [App\Http\Controllers\ReportsController::class, 'MatrimonioReportPdf'])->middleware('auth:sanctum');
