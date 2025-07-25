@@ -44,10 +44,10 @@ class ReportsController extends Controller
     {
         try {
             $matrimonio = mnt_boda::findOrFail($id);
-            $detalle_matrimonio = mnt_detalle_boda::findOrFail($matrimonio->id);
-            $persona_1 = Persona::findOrFail($matrimonio[0]->persona_id);
-            $persona_2 = Persona::findOrFail($matrimonio[1]->persona_id);
-
+            $detalle_matrimonio = mnt_detalle_boda::where('boda_id', $matrimonio->id)->get();
+            $persona_1 = Persona::findOrFail($detalle_matrimonio[0]->persona_id);
+            $persona_2 = Persona::findOrFail($detalle_matrimonio[1]->persona_id);
+    
             $pdf = PDF::loadView('pdf.reportMatrimonio', ['matrimonio' => $matrimonio,'detalle_matrimonio' => $detalle_matrimonio,'persona_1' => $persona_1, 'persona_2' => $persona_2]);
             $fileName = 'reporte-matrimonio-'.$matrimonio->numero_expediente. '.pdf';
             $filePath = 'reports/' . $fileName;
@@ -61,7 +61,7 @@ class ReportsController extends Controller
                 'message' => 'Reporte en PDF generado exitosamente.',
                 'pdf_url' => asset('storage/' . $filePath),
             ]);
-            
+
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Información no encontrada.'], 404);
         } catch (\Exception $e) {

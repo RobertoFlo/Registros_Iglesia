@@ -29,12 +29,12 @@ class MatrimonioRequest extends Request
             'numero_libro' => 'required|max:10|min:1|numeric',
             'libro' => 'required|numeric',
             'folio' => 'required|numeric',
-            'anios_libro' => 'required|max:9|min:9|numeric',
+            'anios_libro' => 'required|max:9|min:9|string',
             'fecha_declaracion' => 'required|date',
             'persona_id_01'=> 'required|exists:mnt_persona,id|unique:mnt_detalle_boda',
             'nombre_testigo_01' => 'required|max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
             'persona_id_02'=> 'required|exists:mnt_persona,id|unique:mnt_detalle_boda',
-            'nombre_testigo_01' => 'required|max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
+            'nombre_testigo_02' => 'required|max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
         ];
     }
     public function updateRules() : array
@@ -47,20 +47,12 @@ class MatrimonioRequest extends Request
             'numero_libro' => 'numeric|max:10|min:1',
             'libro' => 'numeric',
             'folio' => 'numeric',
-            'anios_libro' => 'max:9|min:9',
+            'anios_libro' => 'max:9|min:9|string',
             'fecha_declaracion' => 'date',
-            'persona_id_01'=> 'exists:mnt_persona,id|unique:mnt_detalle_boda',
-            'nombre_testigo_01' => 'max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
-            'persona_id_02'=> 'exists:mnt_persona,id|unique:mnt_detalle_boda',
-            'nombre_testigo_01' => 'max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
-
-        ];
-    }
-    public function storeMessages(): array
-    {
-        return [
-            'persona_id_02.unique' => 'La persona 2 ya tiene un registro',
-            'persona_id_01.unique' => 'La persona 1 ya tiene un registro',
+            'persona_id_01'=> 'required|exists:mnt_persona,id|unique:mnt_detalle_boda',
+            'nombre_testigo_01' => 'required|max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
+            'persona_id_02'=> 'required|exists:mnt_persona,id|unique:mnt_detalle_boda',
+            'nombre_testigo_02' => 'required|max:250|min:2|string|regex:/^[A-Za-zñÑáéíóúÁÉÍÓÚüÜ\s]+$/',
 
         ];
     }
