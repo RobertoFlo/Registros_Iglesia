@@ -31,6 +31,9 @@
         <h3>DIOCESIS DE SONSONATE, EL SALVADOR, C.A.</h3>
         <h5>Generado el: {{ date('d/m/Y H:i') }}</h5>
     </div>
+     <div class="header">
+        <h3>FE DE BAUTISMO</h3>
+    </div>
 
     <div class="datos" style="width: 80%;">
 
@@ -43,8 +46,15 @@
         <p>Que, en la ciudad de Sonsonate, Republica de El Salvador, Centro America, fecha de
         <strong>{{$bautizo->fecha_bautizo}}</strong>, fue Bautizado solemnemente por el
         <strong>{{'Padre ',$bautizo->padre_bautizo}}</strong>, habiendo nacido la titular de esta
-        partida de Bautismo, el <strong>{{ date('d/m/Y') }}</strong>, hij@ de:<strong>
-        {{$persona->nombre_padre}} y {{$persona->nombre_madre}}</strong>, habiendo sido sus padrinos:
+        partida de Bautismo, el <strong>{{ date('d/m/Y') }}</strong>, hij@ de: <strong>
+        @if($persona->nombre_padre && $persona->nombre_madre)
+            {{$persona->nombre_padre}} y {{$persona->nombre_madre}}
+        @elseif($persona->nombre_padre)
+            {{$persona->nombre_padre}}
+        @elseif($persona->nombre_madre)
+            {{$persona->nombre_madre}}
+        @endif
+        </strong>, habiendo sido sus padrinos:
         <strong>{{$bautizo->nombre_padrino}} y {{$bautizo->nombre_madrina}}</strong></p>
         <br>
         <p style="min-height:100px;"><strong>En el margen se lee: </strong>{{$bautizo->comentarios}}</p>
